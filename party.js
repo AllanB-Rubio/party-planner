@@ -31,7 +31,7 @@ async function getEvents() {
   }
 }
 
-// Ask the API to create new event based on from data 
+// Ask the API to create new event based on form data 
 async function addEvent(event) {
   event.preventDefault();
 
@@ -93,7 +93,7 @@ function renderEvents() {
     return;
   }
 
-  const eventsList = state.events.map((event) => {
+  const eventCards = state.events.map((event) => {
     const eventCard = document.createElement("li");
     eventCard.classList.add("event");
     eventCard.innerHTML = `
@@ -113,5 +113,5 @@ function renderEvents() {
     return eventCard;
   });
 
-  eventList.replaceChildren(...eventsList);
+  eventList.replaceChildren(...eventCards);
 }
