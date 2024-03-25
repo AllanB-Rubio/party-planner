@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Party Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <h1>Events</h1>
+
+    <form id="eventForm">
+      <label>
+        Name
+        <input type="text" id="name" name="name" autocomplete="name"
+      /></label>
+
+      <label>
+        Description
+        <input type="text" id="description" name="description"
+      /></label>
+
+      <label>
+        Date
+        <input
+          id="date"
+          type="datetime-local"
+          name="date"
+          value="2024-01-01T08:30"
+        />
+      </label>
+
+      <label>
+        Location
+        <input type="text" id="location" name="location" />
+      </label>
+
+      <button type="submit">
+        Add Event
+      </button>
+
+    </form>
+
+    <ul id="events"></ul>
+
+    <script src="./party.js"></script>
+  </body>
+</html>
