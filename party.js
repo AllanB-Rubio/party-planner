@@ -1,6 +1,8 @@
 const COHORT = "2401-ftb-mt-web-pt";
 const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}/events`;
 
+
+// state - array of events 
 const state = {
   events: [],
 };
@@ -10,12 +12,15 @@ const eventList = document.querySelector("#events");
 const addEventForm = document.querySelector("#eventForm");
 addEventForm.addEventListener("submit", addEvent);
 
+
+// sync state with API and re render 
 async function render() {
   await getEvents();
   renderEvents();
 }
 render();
 
+// update state with artists from API
 async function getEvents() {
   try {
     const response = await fetch(API_URL);
@@ -26,6 +31,7 @@ async function getEvents() {
   }
 }
 
+// Ask the API to create new event based on from data 
 async function addEvent(event) {
   event.preventDefault();
 
@@ -37,11 +43,13 @@ async function addEvent(event) {
   );
 }
 
-// Update UI with the new event after adding
+// Ask API to create new event and rerender 
 async function createEvent(name, description, date, location) {
   try {
+
     // Validate date format before sending the request
-    const isoDate = new Date(date).toISOString(); // Convert to ISO-8601 format
+    // Convert to ISO-8601 format
+    const isoDate = new Date(date).toISOString(); 
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,12 +63,13 @@ async function createEvent(name, description, date, location) {
       throw new Error(`Failed to add event: ${data.message}`);
     }
 
-    await render();
+    render();
   } catch (error) {
     console.error(error);
   }
 }
 
+// Ask APi to delete an event and rerender 
 async function deleteEvent(eventId) {
   try {
     const response = await fetch(`${API_URL}/${eventId}`, {
@@ -71,12 +80,13 @@ async function deleteEvent(eventId) {
       throw new Error("Failed to delete event");
     }
 
-    await render(); // Update UI after deleting event
+    render(); // Update after deleting event
   } catch (error) {
     console.error(error);
   }
 }
 
+// Render events from state 
 function renderEvents() {
   if (!state.events.length) {
     eventList.innerHTML = "<li>No events found.</li>";
